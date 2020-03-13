@@ -1,0 +1,84 @@
+select * from sal
+
+alter table sal add email varchar(20)
+
+alter table sal drop column email
+
+alter table sal add email varchar(20) 
+
+alter table sal alter column commision int
+
+update sal set commision=0.13 where snum=1003
+
+select *,ntile(2) over(order by snum desc) from sal
+
+select top(2) *  from sal order by commision
+
+create table stu(name varchar(20),sub1 int,sub2 int,sub3 int)
+select * from stu
+insert into stu values('raj',98,78,54)
+insert into stu values('munna',88,78,90)
+insert into stu values('sam',78,98,68)
+insert into stu values('var',94,55,89)
+insert into stu values('bro',84,66,54)
+select name,sub1+sub2+sub3 as total from stu
+select top(3)* from stu
+
+update stu set  sub1= 76,sub2=97 where name='raj'
+
+create procedure pro as
+
+begin
+
+select * from stu where name='raj'
+
+end;
+
+create table SBI(acname varchar(20)not null,acnum int primary key,acbal int  not null)
+select * from SBI
+drop table SBI
+insert into SBI values( 'varshi',121,52000)
+insert into SBI values( 'brownie',122,64000)
+insert into SBI values( 'sony',123,100000)
+insert into SBI values( 'raj',124,520000)
+insert into SBI values( 'sam',125,67000)
+delete from  SBI where acname='varshi'
+
+ alter table SBI alter column acbal int
+
+
+create table ICICI(acname varchar(20)not null,acnum int primary key,acbal int not null)
+
+alter table ICICI alter column acbal int
+
+
+insert into ICICI values('rocky',131,91000)
+insert into ICICI values('jain',132,45000)
+insert into ICICI values('james',133,61000)
+insert into ICICI values('bolt',134,87000)
+insert into ICICI values('jhon',135,99000)
+insert into ICICI values('brail',136,31000)
+
+create procedure transact1(@amt as int,@said as int,@daid as int)as
+begin
+update SBI set acbal=acbal-@amt where acnum=@said;
+update ICICI set acbal=acbal+@amt where acnum=@daid;
+end;
+
+exec transact1 1000,125,131
+
+
+create procedure pro2 as
+begin 
+update ICICI set acbal=acbal- 100000 where acnum=131
+update SBI set acbal=acbal+100000 where acnum=125
+end;
+
+exec pro2
+
+select * from ICICI
+
+ALTER table SBI add bank varchar(20)
+
+altee
+r table bank

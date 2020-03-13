@@ -1,0 +1,100 @@
+create table student(name varchar(20) not null,marks int not null,city varchar(10),gender varchar(10) not null)
+
+select * from student
+
+insert into student values('dog',98,'hyd','male')
+insert into student values('cat',95,'pune','female')
+insert into student values('lab',96,'hyd','male')
+insert into student values('lion',90,'bglr','male')
+insert into student values('tiger',99,'bglr','female')
+
+create table student1(name varchar(20) not null,marks int not null,city varchar(10),gender varchar(10) not null)
+
+select * from student1
+
+insert into student1 values('fox',35,'hyd','male')
+insert into student1 values('bear',95,'pune','female')
+insert into student1 values('dog',98,'hyd','male')
+insert into student1 values('lion',90,'bglr','male')
+insert into student1 values('tiger',99,'bglr','female')
+insert into student1 values('monkey',100,'forest','male')
+
+create table student2(name varchar(20) not null,marks int not null,city varchar(10),gender varchar(10) not null)
+
+select * from student2
+
+drop table student2
+
+insert into student2 values('fox',35,'hyd','male')
+insert into student2 values('bear',95,'pune','female')
+insert into student2 values('dog',98,'hyd','male')
+insert into student2 values('lion',90,'bglr','male')
+insert into student2 values('tiger',99,'bglr','female')
+insert into student2 values('snake',35,'bglr','male')
+insert into student2 values('wolf',99,'bglr','female')
+
+A U B
+select * from student union select * from student1
+
+A N B
+select * from student intersect select * from student1
+
+A U C
+select * from student union select * from student2
+
+A N C
+select * from student intersect select * from student2
+
+B U C
+select * from student1 union select * from student2
+
+B N C
+select * from student1 intersect select * from student2
+
+A-(B U C)
+select * from student except (select * from student1 union select * from student2)
+
+B-(A U C)
+select * from student1 except (select * from student union select * from student2)
+
+C-(A U B)
+select * from student2 except (select * from student union select * from student1)
+
+4.A N B-(A N B N C)
+select * from student intersect select * from student1 except (select * from student intersect select * from student1 intersect select * from student1 intersect select * from student2)
+
+5.A N C-(A N B N C)
+select * from student intersect select * from student2 except (select * from student intersect select * from student1 intersect select * from student1 intersect select * from student2)
+
+6.(A N B N C)
+select * from student intersect select * from student1 intersect select * from student1 intersect select * from student2
+
+7.B N C-(A N B N C)
+select * from student1 intersect select * from student2 except (select * from student intersect select * from student1 intersect select * from student1 intersect select * from student2)
+
+8.5+7=(A N C-(A N B N C) U (B N C-(A N B C)))
+(select * from student intersect select * from student2 except (select * from student intersect select * from student1 intersect select * from student1 intersect select * from student2)) union (select * from student1 intersect select * from student2 except (select * from student intersect select * from student1 intersect select * from student1 intersect select * from student2))
+
+5+7=((A N C) U (B N C)-(A N B N C))
+((select * from student intersect select * from student2) union (select * from student1 intersect select * from student2)) except (select * from student intersect select * from student1 intersect select * from student1 intersect select * from student2)
+
+9.4+6=(A N B) U (A N B N C)
+select * from student intersect select * from student1 union (select * from student intersect select * from student1 intersect select * from student1 intersect select * from student2)
+
+10.5+4=(A N C-(A N B N C)) U (A N B-(A N B N C))
+select * from student intersect select * from student2 except (select * from student intersect select * from student1 intersect select * from student1 intersect select * from student2) union (select * from student intersect select * from student1 except (select * from student intersect select * from student1 intersect select * from student1 intersect select * from student2))
+
+5+4=(((A N C) U (A N B))-(A N B N C)
+(((select * from student intersect select * from student2) union (select * from student intersect select * from student1)) except (select * from student intersect select * from student1 intersect select * from student1 intersect select * from student2))
+
+11.6+7=(A N B N C) U (B N C)
+(select * from student intersect select * from student1 intersect select * from student1 intersect select * from student2) union (select * from student1 intersect select * from student2)
+
+12.4+7=(((A N B) U (B N C))-(A N B N C))
+((select * from student intersect select * from student1) union (select * from student1 intersect select * from student2)) except (select * from student intersect select * from student1 intersect select * from student1 intersect select * from student2)
+
+13.5+6+7=(((A N B)
+
+
+
+
