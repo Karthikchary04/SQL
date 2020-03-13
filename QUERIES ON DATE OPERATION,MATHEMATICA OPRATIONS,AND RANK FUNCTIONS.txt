@@ -1,0 +1,25 @@
+select* from student
+select distinct city from student 
+select distinct count(city) as "count of city" from student
+select name,marks from student
+select upper(name),marks from student
+select lower(name),marks from student
+select substring(name,0,8)from student
+select substring(name,0,8),substring(city,0,9)from student
+select len(name)from student
+select name ,len(name)as" no of characters" from student
+select substring(name,len(name)-3,len (name))from student
+select name, upper(name)as "uppercase", lower(name) as "lowercase",len(name) as "no of chars" ,len(name) as "list of chars" from student
+select name + ' city is '+ city as info from student
+select upper(name) + ' city is '+  city + ' gender is '+ gender as info from student
+select upper(substring(name,1,1))+lower(substring(name,2,len(name)-1))+' city is '+  city + ' gender is '+ gender as info from student
+select * from sports
+select day(date) as date,month(date) as month,year(date) as year ,date from sports
+select *, row_number() over (order by marks)as "row no" from student
+insert into student values('appu',22,'hyd','gender')
+
+select *, rank() over (order by marks desc)as "rank no" from student
+select *, dense_rank() over (order by marks desc)as "dense no" from student
+
+
+

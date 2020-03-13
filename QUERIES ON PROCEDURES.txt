@@ -1,0 +1,174 @@
+-- procedure with output params
+create procedure getresult123 @a int, @b int, @c int output, @d int output , @e int output, @f int output, @g int output
+as
+begin
+set @c = @a+@b
+set @d = @a-@b
+set @e = @a*@b
+set @f = @a/@b
+set @g = @a%@b
+end
+-- calling procedure, and geting output param values
+declare @add int, @sub int, @mul int, @div int, @rem int
+execute getresult123 100,600,@add output, @sub output, @mul output, @div output, @rem output
+print @add
+print @sub
+print @mul
+print @div
+print @rem
+-- scalar function : definition
+create function getaverage123 ( @a float ,@b float )
+returns float
+as
+begin
+declare @result float
+select @result = convert(float,(@a+@b)/2)
+return @result
+end
+
+-- to get list of functions
+select * from sysobjects where xtype='fn'
+
+-- to get function code
+sp_helptext getaverage123
+
+select * from INFORMATION_SCHEMA.TABLES
+
+-- call function
+declare @f float
+select @f = dbo.getaverage123(3,6)
+print @f
+
+-- table valued function
+create function getbookdata123 ( @bs char(10) )
+returns table
+as
+return ( select * from bookdrk where b_subject=@bs)
+
+-- calling table valued function
+select * from dbo.getbookdata123('C')
+select * from dbo.getbookdata123('C') where b_price  > 400 order by 7
+-- trigger
+select * from libstd
+
+-- insertion trigger
+create trigger trg_student_ins123 on libstd 
+for insert
+as
+begin
+print 'inserted123'
+end
+
+sp_helptext trg_student_ins123
+
+insert into libstd values('S0020','Abcd','SQL',21,'343242','Hyd','Hyd')
+
+-- while inserting library record
+-- check whether stock available or not for paricular book which to be issued
+-- ok, insert, make stock as stock-1 for particular book in book table
+-- else, stop inserting record
+create trigger trg_insert_library on lib123
+for insert
+as
+begin
+print 'ins trigger'
+-- get bookid from inserted magic
+declare @insbid char(10)
+declare @estock int
+select @insbid = b_id from inserted
+select @estock = b_qoh from bookdrk where b_id = @insbid
+print 'Available stock : ' + convert(char(100),@estock)
+if @estock<1
+begin
+	print 'No stock to issue book'
+	rollback
+end
+else
+begin	
+	update bookdrk
+	set b_qoh = @estock-1
+	where b_id=@insbid
+	print 'issued, updated book'
+end
+end
+-----------------------------------------------------
+select * from bookdrk
+select * from lib123
+create trigger trg_insert_library123 on lib123
+after insert
+as
+begin
+print 'ins trigger'
+-- get bookid from inserted magic
+declare @insbid char(10)
+declare @estock int
+select @insbid = b_id from inserted
+select @estock = b_qoh from bookdrk where b_id = @insbid
+print 'Available stock : ' + convert(char(100),@estock)
+if @estock<1
+begin
+	print 'No stock to issue book'
+	rollback
+end
+else
+begin	
+	update bookdrk
+	set b_qoh = @estock-1
+	where b_id=@insbid
+	print 'issued, updated book'
+end
+end
+
+drop trigger trg_insert_library123
+
+insert into lib123 values('T0018','S0002','B0004',getdate(),null)
+
+select * from libstd
+select * from magictable
+sp_help libstd
+update bookdrk
+set b_qoh =0
+where b_id='B0003'
+--to prevent deletion
+
+create trigger trg_delete on lib123
+for delete
+as 
+begin
+print 'no record is to be deleted'
+  rollback
+  end
+
+create table backuptable
+(
+b_id char(5),
+b_name char(20),
+b_subject char(20),
+b_author char(30),
+b_ref char(5),
+b_price int,
+b_qoh int
+)
+
+select * into magictable from libstd where 1=2
+
+select * from magictable
+
+ create trigger trg_magictable_student123 on libstd
+ for update
+ as
+ begin
+ --declare @stid char(5),@stn char(30),@stc char(10),@sta int,@stp char(10),@stadd char(100),@stcity char(20)
+ --select
+ --@stid=st_id,@stn=st_name,@stc=st_crs,@sta=st_age,@stp=st_phn,@stadd=st_add,@stcity=st_city from deleted
+ insert into magictable select * from deleted
+ --insert into magictable values(@stid,@stn,@stc,@sta,@stp,@stadd,@stcity,getdate())
+ end
+
+ drop trigger trg_magictable_student123
+
+ update libstd
+ set st_age=23
+ where st_id='S0005' 
+ alter table magictable
+ drop column modifieddate

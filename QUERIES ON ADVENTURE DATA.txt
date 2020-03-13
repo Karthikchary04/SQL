@@ -1,0 +1,385 @@
+use nanni_45
+drop table student
+create table student
+(
+	st_id  char(5),
+	st_name char(30) not null,
+	st_crs char(10) not null,
+	st_age int,
+	st_phn char(10),
+	st_add varchar(100),	 
+	st_city char(20)
+)
+select*from student
+-- to insert records in student table
+insert student values ('S0001','Rakesh','C#',17,'34534534','ch pally','sec-bad')
+insert student values ('S0002','Ramya','.Net',18,'1213123','Narayanguda','Hyd-bad')
+insert student values ('S0003','Krishna','CCNA',21,'34534535','SR nagar','Hyd-bad')
+insert student values ('S0004','Srinivas','SQL AD',18,'6545666','AM pet','Hyd-bad')
+insert student values ('S0005','Sridhar','C++',19,'75673454','k guda','sec-bad')
+insert student values ('S0006','Nalini','SQL',19,'3435345','k guda','sec-bad')
+insert student values ('S0007','Priya','Java',19,'6675677','malak pet','Hyd-bad')
+insert student values ('S0008','Raghu','MCSE',19,'94565534','LB NAgar','Hyd-bad')
+insert student values ('S0009','Vijay','VB',19,'1245564','ch ghat','hyd-bad')
+insert student values ('S0010','Karunakar','HTML',19,'976855','Koti','Hyd-bad')
+insert student values ('S0011','Shashirekha','C#',19,'75634534','Ram nagar','sec-bad')
+insert student values ('S0012','Suseela','SQL',19,'1543565','L Puram','sec-bad')
+insert student values ('S0013','Altamash','CCNA',19,'6456456','B Pet','Hyd-bad')
+
+select * from student
+
+-- to create book table
+create table book
+(
+	b_id char(5),
+	b_name char(20) not null,
+	b_subject char(20) not null,
+	b_author char(30) not null,
+	b_ref char(5),			
+	b_price int,
+	b_qoh int
+)-- to insert records in book table
+insert book values('B0001','OSI Rules','N+','Mc Gr',null,345,20)
+insert book values('B0002','OOPs with C++','C++','BG Swamy',null,120,60)
+insert book values('B0003','Data structures','C','Raghu',null,450,10)
+insert book values('B0004','Web App In C#','C#','Todd lamle',null,275,15)
+insert book values('B0005','SQL Qrs','SQL','Mc Gr',null,175,15)
+insert book values('B0006','Java for beginners','Java','Raju',null,800,75)
+insert book values('B0007','Dummys for HTML','HTML','mnop',null,535,120)
+insert book values('B0008','Clear CCNA','CCNA','MCGril',null,725,140)
+insert book values('B0009','Spirit of C','C','Mulish',null,350,25)
+insert book values('B0010','Web App in Java','Java','XYZ','B0006',250,85)
+insert book values('B0011','Libraries in C','C','Raju','B0009',450,460)
+insert book values('B0012','Sockets is C#','.Net','ABCD',null,780,25)
+insert book values('B0013','Services in ASP','.Net','XYZ',NULL,750,156)
+insert book values('B0014','FWAD','Server 2008','MOC',NULL,1550,150)
+insert book values('B0015','WAN @ access','CCNA','CISCO','B0008',1450,175)
+insert book values('B0016','Routing Techniques','CCNA','Todd','B0008',350,185)
+insert book values('B0017','Scripting in html','HTML','MNOP','B0007',574,254)
+insert book values('B0018','Graphics in C','C','XYZ','B0011',650,325)
+insert book values('B0019','COM+','.Net','Mulish',NULL,545,25)
+insert book values('B0020','Mobile app in Java','Java','M cooper','B0006',1350,145)
+insert book values('B0022','Tags in html','HTML','BG Swamy',null,450,133)
+insert book values('B0023','VB Bible','.Net','MOC',null,400,101)
+insert book values('B0024','CISCO Conf','CCNA','Todd Lamle',null,635,85)
+insert book values('B0025','CCNP - Routing','CCNP','ABCD',null,521,42)
+insert book values('B0026','CCNP - Switching','CCNP','Todd',null,486,74)
+select * from book
+select b_name from book
+select 'book id'=b_id from book
+select * from book order by b_name asc,b_author desc
+select
+'info'=rtrim(st_name) +'joined for'+(st_crs) from student
+select rtrim(b_name)+'is a authored by'+rtrim(b_author)+'and price of this book is'+convert(char(3),b_price)
+from book
+select*from book where 1=1
+select * from book where b_subject='c'
+select * from book where b_price>=400
+select * from book where b_price>=400 and b_subject ='c'
+select * from book where b_author='raju' or b_price>=200
+select *from book where b_subject='c' or b_subject='c++' or b_subject='java'
+select * from book where b_price between 500 and 700
+select * from book where b_ref is null
+ select * from book where b_ref is not null
+ select ascii('a')
+ select char(97)
+ select charindex('e','hyderabad')
+ select charindex('d','hyderabad')
+ select difference('hyderabad','hiderabad')
+ select b_name,left(b_name,2)from book
+ select b_name,right(b_name,2)from book
+ select b_name,right(rtrim(b_name),2) from book
+ select b_name,len(b_name) from book
+ select b_name,lower(b_name) from book
+ select b_name,upper(b_name) from book
+ select
+ 'a' ='niit','b'=rtrim('     niit'),
+'c'=ltrim('   niit')
+select'hyderabad',replace('hyderabad','era','ra')
+select 'hyderabad', replace('hyderabad','abcd','12')
+select 'hyderabad',patindex('hyderabad','der')
+select 'hyderabad',patindex('%der%','hyderabad')
+select replicate(b_name,2) from book
+select b_name,reverse(b_name) from book
+select b_name+ space(3)+b_subject from book
+select'hyderabad',substring('hyderabad',3,2)
+select concat (b_name,' ',b_subject) from book
+select distinct b_subject from book
+select * from book order by b_price desc
+select top 5 * from book order by b_price desc
+select top 10 percent * from book order by b_price desc
+select * from book order by b_price desc offset 5 rows 
+fetch next 7 rows only
+select count (b_qoh) from book where b_subject ='c'
+select sum(b_qoh) from book where b_subject='java'
+select min(b_price) from book where b_subject ='html'
+select max(b_price) from book where b_subject='c'
+select avg(b_price) from book where b_subject='c'
+--groupby
+select b_subject from book group by b_subject
+select b_subject, count(*) from book group by b_subject
+select b_author,b_subject ,count(*) from book group by b_author,b_subject
+select b_subject,count(*),min(b_price),max(b_price),sum(b_qoh),avg(b_price) from book group by b_subject
+--dateby
+select getdate(),dateadd(m,6,getdate()),dateadd(q,3,getdate()),dateadd(d,15,getdate())
+select getdate(),dateadd(wk,7,getdate())
+select getdate(),datename(dw,getdate()),datename(mm,getdate())
+select datepart(dd,getdate())
+select datepart(mm,getdate())
+select datepart(wk,getdate())
+select(getdate()),month(getdate()),year(getdate()) 
+select GETUTCDATE(),GETDATE()
+select datefromparts(2000,12,30)
+select datetimefromparts(2000,3,24,12,56,45,123)
+select EOMONTH(getdate(),4)
+
+--adventure
+use adventureworks
+select * from humanresources.employee
+select * from INFORMATION_SCHEMA.tables order by 2,3
+ --1
+ select * from sales. customer
+ --2
+ select * from sales.CreditCard
+ select creditcardid,cardtype, cardnumber, expyear from sales.creditcard
+ --3
+ select customerid,accountnumber from sales.customer where territoryid =4
+ --4
+ select * from sales.SalesOrderdetail
+ select * from sales.SalesOrderDetail where LineTotal>=2000
+ --5
+ select * from sales.SalesOrderDetail where ProductID =843
+ --6
+ select * from sales.salesorderheader
+ select * from sales.SalesOrderHeader where OrderDate='2004-7-31'
+ --7
+ select salesorderid,orderqty,unitprice,linetotal from sales.SalesOrderDetail
+ --8
+ select * from sales.SalesOrderDetail where LineTotal between 2000 and 2100
+ --9
+ select * from sales.SalesTerritory
+ select name,countryregioncode,salesytd from sales.SalesTerritory where TerritoryID=1
+ --10
+ select * from sales.SalesTaxRate
+ select * from sales.SalesOrderHeader where taxamt >10000
+ ------primary keys----------------------
+
+ select * from sysdatabases
+ use nanni_sat
+ create table student14
+ (
+ stid char(20) primary key,
+ stname char(40) not null,
+ stcrs char(10) not null,
+ stage int,
+ stemil char(40) unique,
+ stphn char(11) unique
+ )
+ sp_help student14
+ select * from student14
+ insert student14 values ('S0001','Rakesh','C#',17,'nanni@gmail.com','34534534')
+insert student14 values ('S0002','Ramya','.Net',18,'tanu@yahoo.com','1213123')
+insert student14 values ('S0003','Krishna','CCNA',21,'r@gmail.com','34534535')
+insert student14 values ('S0004','Srinivas','SQL AD',18,'123@asd.com','6545666')
+insert student14 values ('S0005','Sridhar','C++',19,'navya@sjuh.vom','75673454')
+insert student14 values ('S0006','Nalini','SQL',19,'vedesh.com','3435345')
+insert student14 values ('S0007','Priya','Java',19,'ntr.com','6675677')
+insert student14 values ('S0008','Raghu','MCSE',19,'padmanandyala@gmail.com','9456785676')
+insert student14 values ('S0009','Vijay','VB',19,'subbi.com','1245564')
+insert student14 values ('S0010','Karunakar','HTML',19,'vijaya@234.com','976855')
+insert student14 values ('S0011','Shashirekha','C#',19,'nmkjgh@.com','75634534')
+insert student14 values ('S0012','Suseela','SQL',19,'mniygy%&.com','1543565')
+insert student14 values ('S0013','Altamash','CCNA',19,'mnu.com','6456456')
+
+ create table book143
+ (
+ 	b_id char(5) primary key,
+	b_name char(20) not null,
+	b_subject char(20) not null,
+	b_author char(30) not null,
+	b_ref char(5),			
+	b_price int,
+	b_qoh int,
+)-- to insert records in book table
+insert book143 values('B0001','OSI Rules','N+','Mc Gr',null,345,20)
+insert book143 values('B0002','OOPs with C++','C++','BG Swamy',null,120,60)
+insert book143 values('B0003','Data structures','C','Raghu',null,450,10)
+insert book143 values('B0004','Web App In C#','C#','Todd lamle',null,275,15)
+insert book143 values('B0005','SQL Qrs','SQL','Mc Gr',null,175,15)
+insert book143 values('B0006','Java for beginners','Java','Raju',null,800,75)
+insert book143 values('B0007','Dummys for HTML','HTML','mnop',null,535,120)
+insert book143 values('B0008','Clear CCNA','CCNA','MCGril',null,725,140)
+insert book143 values('B0009','Spirit of C','C','Mulish',null,350,25)
+insert book143 values('B0010','Web App in Java','Java','XYZ','B0006',250,85)
+insert book143 values('B0011','Libraries in C','C','Raju','B0009',450,460)
+insert book143 values('B0012','Sockets is C#','.Net','ABCD',null,780,25)
+insert book143 values('B0013','Services in ASP','.Net','XYZ',NULL,750,156)
+insert book143 values('B0014','FWAD','Server 2008','MOC',NULL,1550,150)
+insert book143 values('B0015','WAN @ access','CCNA','CISCO','B0008',1450,175)
+insert book143 values('B0016','Routing Techniques','CCNA','Todd','B0008',350,185)
+insert book143 values('B0017','Scripting in html','HTML','MNOP','B0007',574,254)
+insert book143 values('B0018','Graphics in C','C','XYZ','B0011',650,325)
+insert book143 values('B0020','Mobile app in Java','Java','M cooper','B0006',1350,145)
+insert book143 values('B0022','Tags in html','HTML','BG Swamy',null,450,133)
+insert book143 values('B0023','VB Bible','.Net','MOC',null,400,101)
+insert book143 values('B0024','CISCO Conf','CCNA','Todd Lamle',null,635,85)
+insert book143 values('B0025','CCNP - Routing','CCNP','ABCD',null,521,42)
+insert book143 values('B0026','CCNP - Switching','CCNP','Todd',null,486,74)
+select * from book143
+create table library123
+(
+trid char(5) primary key,
+stid char(20) references student14(stid),
+b_id char(5) references book143(b_id),
+is_dt date,
+rt_dt date,
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
